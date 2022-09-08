@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -108,10 +110,26 @@ public class Signup {
 
             System.out.print(white + "3. Enter Your DOB (YEAR/MONTH/DAY) :- " + "\u001B[36m");
             temp = scanner.nextLine();
-            if (Objects.equals(temp, "0")) {
-                break;
+
+            LocalDate date = LocalDate.parse(temp.toString().replaceAll("/", "-"));
+            LocalDate curDate = LocalDate.now();
+
+            int tempdob = 0;
+
+
+                if (Objects.equals(temp, "0")) break;
+
+            if ((date != null) && (curDate != null)) {
+                tempdob = Period.between(date, curDate).getYears();
             }
-            else if(temp.toString().matches("^(19|20)\\d\\d[-/.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$")){
+            else {
+                System.out.println(red+"\n\n\n\n\nYou are not adult!\n\n\n\n\n");
+                Thread.sleep(2000);
+                ClearScreen.clearScreen();
+                continue;
+            }
+
+            if(temp.toString().matches("^(19|20)\\d\\d[-/.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$") && tempdob >= 18 && tempdob <= 200){
                 dob = (String) temp;
             }
             else {
@@ -263,8 +281,7 @@ public class Signup {
                 ClearScreen.clearScreen();
 
             }
-//            System.out.println( cyan + "Your Account has been Created! We are sending you to Main Menu." + white);
-            System.out.println(cyan+"""
+            System.out.print(cyan+"""
                                         
                     ██╗░░░██╗░█████╗░██╗░░░██╗██████╗░  ░█████╗░░█████╗░░█████╗░░█████╗░██╗░░░██╗███╗░░██╗████████╗
                     ╚██╗░██╔╝██╔══██╗██║░░░██║██╔══██╗  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░██║████╗░██║╚══██╔══╝
@@ -299,11 +316,16 @@ public class Signup {
                     ██╔████╔██║███████║██║██╔██╗██║  ██╔████╔██║█████╗░░██╔██╗██║██║░░░██║░░░
                     ██║╚██╔╝██║██╔══██║██║██║╚████║  ██║╚██╔╝██║██╔══╝░░██║╚████║██║░░░██║░░░
                     ██║░╚═╝░██║██║░░██║██║██║░╚███║  ██║░╚═╝░██║███████╗██║░╚███║╚██████╔╝██╗
-                    ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝╚═╝░░╚══╝  ╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░╚═╝
-                    """+white);
+                    ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝╚═╝░░╚══╝  ╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░╚═╝""");
+            Thread.sleep(500);
+            System.out.print("➊\040\040");
+            Thread.sleep(500);
+            System.out.print("➋\040\040");
+            Thread.sleep(500);
+            System.out.println("➌\040"+white);
+            Thread.sleep(2000);
             ClearScreen.clearScreen();
 
-            Thread.sleep(5000);
             exit = true;
         }
 
