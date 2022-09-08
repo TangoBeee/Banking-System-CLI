@@ -40,6 +40,6 @@ public class InsertingUserName {
     }
     public static void insertingUserInfo(Connection con) throws SQLException {
         con.prepareStatement("INSERT INTO `banking_system`.`user_info`(`name`, email, dob, age, gender, phoneno, address, governid, networth, acctype, accountno, password) VALUES('"+name+"','"+email+"', '"+dob+"', "+age+", '"+gender+"', '"+phoneno+"', '"+address+"', '"+government+"', "+networth+", '"+accType+"', '"+ accountno +"', '"+password+"');").executeUpdate();
-        con.prepareStatement("INSERT INTO `banking_system`.`banking`(transaction, balance, email) VALUES(0, 500, '"+email+"');");
+        con.prepareStatement("INSERT INTO `banking_system`.`banking`(transaction, balance, email) VALUES(0, 500, '"+email+"');").executeUpdate();
     }
 }
