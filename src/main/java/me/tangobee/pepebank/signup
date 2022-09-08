@@ -1,0 +1,153 @@
+package Auth;
+
+import functions.ClearScreen;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Signup {
+    public static final String white = "\u001B[37m";
+    public static final String red = "\u001B[31m";
+    public static final String ylo = "\u001B[33m";
+    public static void signup() {
+
+        String email, dob, gender, governid, accounttype;
+        int age, phoneno;
+
+        ClearScreen.clearScreen();
+
+        boolean exit = false;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while(!exit){
+            System.out.println(red+"""
+
+                     _______ _________ _______  _                 _______\s
+                    (  ____ \\\\__   __/(  ____ \\( (    /||\\     /|(  ____ )
+                    | (    \\/   ) (   | (    \\/|  \\  ( || )   ( || (    )|
+                    | (_____    | |   | |      |   \\ | || |   | || (____)|
+                    (_____  )   | |   | | ____ | (\\ \\) || |   | ||  _____)
+                          ) |   | |   | | \\_  )| | \\   || |   | || (     \s
+                    /\\____) |___) (___| (___) || )  \\  || (___) || )     \s
+                    \\_______)\\_______/(_______)|/    )_)(_______)|/      \s
+                                                                         \s
+
+                    """+white);
+
+            System.out.println(red+"|------------------------------------------------------------|"+white);
+
+            System.out.println("\n");
+            System.out.println(ylo+"0. QUIT\n\n"+white);
+
+
+// GETTING INFO FROM USER
+
+            System.out.print("1. Enter Your Name :- " + "\u001B[36m");
+            String iname = scanner.nextLine();
+            System.out.println();
+            if(iname == "0") {
+                exit = true;
+            }
+
+            System.out.print(white+"2. Enter Your Email-ID :- ");
+            String iemail = scanner.nextLine();
+            if(iemail == "0") {
+                exit = true;
+            }
+            ArrayList<String> emails = new ArrayList<String>();
+            emails.add(iemail);
+            String regex = "^(.+)@(.+)#";
+
+            Pattern pattern = Pattern.compile(regex);
+            System.out.println();
+
+            for(String em:emails) {
+                Matcher matcher = pattern.matcher(em);
+                if(matcher.matches()) {
+                    email = iemail;
+                }
+            }
+
+            System.out.print("3. Enter Your DOB (YEAR-MONTH-DAY) :- ");
+            String idob = scanner.nextLine();
+            System.out.println();
+            if(idob == "0") {
+                exit = true;
+            }
+
+
+            System.out.print("4. Enter Your Age :- ");
+            int iage = scanner.nextInt();
+            System.out.println();
+            if(iage == 0) {
+                exit = true;
+            }
+            else if(iage <= 150) {
+                age = iage;
+            }
+
+            System.out.print("5. Enter Your Gender ('M'ale, 'F'emale, 'O'ther) :- ");
+            String igender = scanner.nextLine();
+            if(igender == "0") {
+                exit = true;
+            }
+            System.out.println();
+            if(igender.matches("(?i)Male|Female|Other|M|F|O")) {
+                gender = igender;
+            }
+
+            System.out.print("6. Enter Your Phone-No :- ");
+            Integer iphoneno = scanner.nextInt();
+            int temp = iphoneno;
+            if(iphoneno == 0) {
+                exit = true;
+            }
+            System.out.println();
+            if((temp = Integer.parseInt(String.valueOf(String.valueOf(iphoneno).length()))) == 10) {
+                phoneno = iphoneno;
+            }
+
+            System.out.print("7. Enter Your Address :- ");
+            String iaddress = scanner.nextLine();
+            System.out.println();
+            if(iaddress == "0") {
+                exit = true;
+            }
+
+            System.out.print("8. Enter Your Government-ID :- ");
+            String igovernid = scanner.nextLine();
+            System.out.println();
+            if(igovernid == "0") {
+                exit = true;
+            }
+            else if(igovernid.length() == 12) {
+                governid = igovernid;
+            }
+
+            System.out.print("9. Enter Your Net Worth :- ");
+            int inetworth = scanner.nextInt();
+            System.out.println();
+            if(inetworth == 0) {
+                exit = true;
+            }
+
+            System.out.print("10. What Type Of Accout You Need? 'S'aving/'C'urrent :- ");
+            String iaccouttype = scanner.nextLine();
+            System.out.println();
+            if(iaccouttype == "0") {
+                exit = true;
+            }
+            if(iaccouttype.matches("(?i)S|C|Saving|Current")) {
+                accounttype = iaccouttype;
+            }
+
+            System.out.println(red+"|------------------------------------------------------------|"+white);
+
+            exit = true;
+        }
+    }
+}
