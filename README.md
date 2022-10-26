@@ -1,6 +1,9 @@
 # Banking-System-CLI
 Banking System based on CLI using Java + MySQL
 
+App Demo:-
+https://youtu.be/YOtI2ukH_jo
+
 
 right now i am working on this project
 
